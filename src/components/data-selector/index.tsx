@@ -17,11 +17,12 @@ import {
   datasetLoad,
 } from '../../actions';
 import {DEFAULT_DATASETS} from '../../constants';
+import {EXTERNAL_DATASETS} from '../../external';
 import {Dataset, State} from '../../models';
 import {selectDataset} from '../../selectors';
 
 export interface DataSelectorOwnProps {
-  title: 'Change' | 'Load';
+  title: 'Change' | 'Load' | 'Open';
 }
 
 export interface DataSelectorConnectProps {
@@ -75,11 +76,15 @@ export class DataSelectorBase extends React.PureComponent<DataSelectorProps, Dat
           </div>
           <Tabs className={styles['react-tabs']}>
             <TabList className={styles['tab-list']}>
-              <Tab className={styles.tab}>Change Dataset</Tab>
+              <Tab className={styles.tab}>External Datasets</Tab>
+              <Tab className={styles.tab}>Default Datasets</Tab>
               <Tab className={styles.tab}>Paste or Upload Data</Tab>
               <Tab className={styles.tab}>From URL</Tab>
             </TabList>
 
+            <TabPanel className={styles['tab-panel']}>
+              {this.renderExternalDatasetPanel()}
+            </TabPanel>
             <TabPanel className={styles['tab-panel']}>
               {this.renderDatasetPanel()}
             </TabPanel>
@@ -115,6 +120,16 @@ export class DataSelectorBase extends React.PureComponent<DataSelectorProps, Dat
       <div>
         <ul styleName='dataset-list'>
           {DEFAULT_DATASETS.map(this.renderDataset)}
+        </ul>
+      </div>
+    );
+  }
+  
+  private renderExternalDatasetPanel() {
+    return (
+      <div>
+        <ul styleName='dataset-list'>
+          {EXTERNAL_DATASETS.map(this.renderDataset)}
         </ul>
       </div>
     );

@@ -40,7 +40,7 @@ describe('lib-voyager', () => {
         try {
           const voyagerInst = CreateVoyager(container, undefined, undefined);
           const dataPaneHeader = document.querySelector('.load-data-pane__load-data-pane');
-          expect(dataPaneHeader.textContent).toContain('Please load a dataset');
+          expect(dataPaneHeader.textContent).toContain('Please open a dataset');
 
           setTimeout(() => {
             try {

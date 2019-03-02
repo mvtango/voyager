@@ -18,9 +18,9 @@ export class LoadDataBase extends React.PureComponent<DataPanelProps, {}> {
     if (showDataSourceSelector) {
       return (
         <div className="pane" styleName="load-data-pane">
-          Please load a dataset
+          Please open a dataset
           {' '}
-          <DataSelector title="Load"/>
+          <DataSelector title="Open"/>
         </div>
       );
     } else {
