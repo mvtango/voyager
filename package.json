@@ -38,7 +38,9 @@
     "deploy": "npm run clean && npm run lint && npm run test && scripts/publish.sh && node scripts/deploy.js"
   },
   "dependencies": {
+    "@types/axios": "^0.14.0",
     "ajv": "^5.2.2",
+    "axios": "^0.18.0",
     "compassql": "0.20.2",
     "font-awesome": "^4.7.0",
     "font-awesome-sass-loader": "^1.0.3",
@@ -77,8 +79,8 @@
     "vega-datasets": "^1.8.0",
     "vega-expression": "^2.3.1",
     "vega-lite": "2.4.0",
-    "vega-typings": "^0.2.15",
     "vega-tooltip": "^0.4.2",
+    "vega-typings": "^0.2.15",
     "vega-util": "1.7.0"
   },
   "devDependencies": {

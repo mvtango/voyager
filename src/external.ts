@@ -1,4 +1,7 @@
 
+
+import axios from 'axios';
+
 const parseQueryString = (input:string , obj = Object.create(null)) => 
 decodeURI(input.slice(input.indexOf('?') + 1, 
 input.length)).split('&').map(entry => [
@@ -10,6 +13,15 @@ input.length)).split('&').map(entry => [
 
 
 const qs = parseQueryString(window.location.search);
+
+export let LOADED_DATASETS:any[] = [];
+
+axios.get(qs['url']).then(response => { 
+
+    LOADED_DATASETS = response.data.datasets; 
+
+});
+
 
 
 export const EXTERNAL_DATASETS = [
