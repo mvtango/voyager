@@ -17,7 +17,6 @@ import {
   datasetLoad,
 } from '../../actions';
 import {DEFAULT_DATASETS} from '../../constants';
-import {EXTERNAL_DATASETS} from '../../external';
 import {LOADED_DATASETS} from '../../external';
 import {Dataset, State} from '../../models';
 import {selectDataset} from '../../selectors';
@@ -130,8 +129,9 @@ export class DataSelectorBase extends React.PureComponent<DataSelectorProps, Dat
     return (
       <div>
         <ul styleName='dataset-list'>
-          {LOADED_DATASETS.map(this.renderDataset)}
+          {LOADED_DATASETS.datasets.map(this.renderDataset)}
         </ul>
+        <p><i>{LOADED_DATASETS.status}</i></p>
       </div>
     );
   }

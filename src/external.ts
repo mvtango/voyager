@@ -14,11 +14,18 @@ input.length)).split('&').map(entry => [
 
 const qs = parseQueryString(window.location.search);
 
-export let LOADED_DATASETS:any[] = [];
+export let LOADED_DATASETS:any = { 'status' : 'use "url" query parameter to load a dataset list object like { datasets: [ { name: .. , url .. , id: .., description: .. , group: ... }, .. ]}',
+                                   'datasets'  : []
+                                   };
 
 axios.get(qs['url']).then(response => { 
 
-    LOADED_DATASETS = response.data.datasets; 
+    LOADED_DATASETS = response.data;
+    LOADED_DATASETS['url'] = qs['url'];
+    LOADED_DATASETS['status'] = response.data.datasets.length + ' datasets loaded from ' + qs['url'];
+    LOADED_DATASETS.datasets.forEach((dataset : any) => {
+        dataset.url = new URL(dataset.url, qs['url']).href;
+    });
 
 });
 
