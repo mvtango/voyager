@@ -18,15 +18,17 @@ export let LOADED_DATASETS:any = { 'status' : 'use "url" query parameter to load
                                    'datasets'  : []
                                    };
 
-axios.get(qs['url']).then(response => { 
+
+const dsurl = new URL(qs['url'], document.location.href).href;
+
+axios.get(dsurl).then(response => { 
 
     LOADED_DATASETS = response.data;
-    LOADED_DATASETS['url'] = qs['url'];
-    LOADED_DATASETS['status'] = response.data.datasets.length + ' datasets loaded from ' + qs['url'];
+    LOADED_DATASETS['url'] = dsurl;
+    LOADED_DATASETS['status'] = response.data.datasets.length + ' dataset(s) loaded from ' + dsurl;
     LOADED_DATASETS.datasets.forEach((dataset : any) => {
-        dataset.url = new URL(dataset.url, qs['url']).href;
+        dataset.url = new URL(dataset.url, dsurl).href;
     });
-
 });
 
 
