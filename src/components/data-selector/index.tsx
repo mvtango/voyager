@@ -50,6 +50,7 @@ export class DataSelectorBase extends React.PureComponent<DataSelectorProps, Dat
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.renderDataset = this.renderDataset.bind(this);
+    this.renderUrlDataset = this.renderUrlDataset.bind(this);
     this.onFileChange = this.onFileChange.bind(this);
     this.onDataTextSubmit = this.onDataTextSubmit.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
@@ -103,13 +104,31 @@ export class DataSelectorBase extends React.PureComponent<DataSelectorProps, Dat
     );
   }
 
+  private renderUrlDataset(dataset: NamedData) {
+    const selected = (dataset.name === this.props.data.name) ? styles['element-selected'] : null;
+
+    let url = "";
+    if ('url' in dataset) {
+        url = dataset['url'];
+    }
+    return (
+      <li key={dataset.name} className={`${styles['dataset-list-element']} ${selected}`} >
+        <a onClick={this.onDatasetChange.bind(this, dataset)}>
+          <i className="fa fa-database" > {dataset.name} </i>
+        </a>
+        <br/>
+        <textarea>{url}</textarea>
+      </li>
+    );
+  }
+
   private renderDataset(dataset: NamedData) {
     const selected = (dataset.name === this.props.data.name) ? styles['element-selected'] : null;
 
     return (
       <li key={dataset.name} className={`${styles['dataset-list-element']} ${selected}`} >
         <a onClick={this.onDatasetChange.bind(this, dataset)}>
-          <i className="fa fa-database" /> {dataset.name}
+          <i className="fa fa-database" > {dataset.name} </i>
         </a>
       </li>
     );
@@ -129,7 +148,7 @@ export class DataSelectorBase extends React.PureComponent<DataSelectorProps, Dat
     return (
       <div>
         <ul styleName='dataset-list'>
-          {LOADED_DATASETS.datasets.map(this.renderDataset)}
+          {LOADED_DATASETS.datasets.map(this.renderUrlDataset)}
         </ul>
         <p><i>{LOADED_DATASETS.status}</i></p>
       </div>
